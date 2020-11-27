@@ -27,4 +27,4 @@ CEM.removeDirectListener("listener 2");
 
 window.button = new CEM.ButtonElement(new CEM.BoxDimensions(0, 0, 100, 100));
 
-setInterval(() => console.log(CEM.isInputActive("KeyD"), CEM.isInputActive("LeftMouse"), CEM.isInputActive("RightMouse"), CEM.mousePositionX, CEM.mousePositionY), 1200);
+//setInterval(() => console.log(CEM.isInputActive("KeyD"), CEM.isInputActive("LeftMouse"), CEM.isInputActive("RightMouse"), CEM.mousePositionX, CEM.mousePositionY), 1200);

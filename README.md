@@ -21,6 +21,8 @@ const CEM = new CanvasEventManager(
 );
 ```
 
+---
+
 ## Event manager properties
 
 **canvas**
@@ -112,7 +114,7 @@ Returns true if at least 1 element was removed, false if none were removed.
 ```js
 CEM.isInputActive(
 
-  /*string: keyboard event code, LeftMouse or RightMouse*/
+  /*string: keyboard event code (KeyW, Digit3, ControlLeft, etc.), LeftMouse or RightMouse*/
   "KeyW"
 
 );
@@ -129,3 +131,44 @@ Detects if specified input is currently being pressed.
 Returns true if input is down, false if input is up.
 
 Keyboard event codes can be found [here](https://keycode.info/).
+
+---
+
+## Event manager classes
+
+**BoxDimensions**
+```js
+const dimensions = new CEM.BoxDimensions(
+  
+  /*x position in pixels*/
+  100,
+  /*y position in pixels*/
+  100,
+  /*width in pixels*/
+  200,
+  /*height in pixels*/
+  200,
+
+);
+//the value of dimensions is {x: 100, y: 100, width: 200, height: 200}
+
+
+CEM.addDirectListener(
+  "click",
+  {
+    x: 100,
+    y: 100,
+    width: 200,
+    height: 200,
+  },
+  event => console.log(event.type),
+);
+
+//this is the same as:
+
+CEM.addDirectListener(
+  "click",
+  new CEM.BoxDimensions(100, 100, 200, 200),
+  event => console.log(event.type),
+);
+```

@@ -1,7 +1,9 @@
+//need to remove private properties as they are safari incompatible
+
 const supportedEvents = ["click", "mousemove"];
 
 class Element {
-  #_doNotTouch = {
+  _doNotTouch = {
     symbol: Symbol(),
     listeners: [],
   };
@@ -27,7 +29,7 @@ class Element {
 
 
 export default class EventManager {
-  #_doNotTouch = {
+  _doNotTouch = {
     events: [],
     eventFunctions: [],
 
@@ -35,9 +37,9 @@ export default class EventManager {
     eventFunctionsPrivate: [],
 
     elementIDIndex: 0,
-  };
 
-  #activeInputs = {};
+    activeInputs: {},
+  };
 
   canvasElements = [];
 
@@ -71,18 +73,18 @@ export default class EventManager {
     });
 
     canvas.addEventListener("keydown", event =>
-      this.#activeInputs[event.code] = true
+      this._doNotTouch.activeInputs[event.code] = true
     );
     canvas.addEventListener("keyup", event =>
-      this.#activeInputs[event.code] = false
+      this._doNotTouch.activeInputs[event.code] = false
     );
 
     canvas.addEventListener("mousedown", event =>
-      this.#activeInputs[["LeftMouse", "RightMouse"][event.button / 2]] = true
+      this._doNotTouch.activeInputs[["LeftMouse", "RightMouse"][event.button / 2]] = true
     );
 
     canvas.addEventListener("mouseup", event =>
-      this.#activeInputs["LeftMouse"] = this.#activeInputs["RightMouse"] = false
+      this._doNotTouch.activeInputs["LeftMouse"] = this._doNotTouch.activeInputs["RightMouse"] = false
     );
   }
 
@@ -96,29 +98,29 @@ export default class EventManager {
       privateListener = "Private";
     }
 
-    if (this.#_doNotTouch["events" + privateListener].includes(eventType)) {
-      this.#_doNotTouch["eventFunctions" + privateListener].push({
+    if (this._doNotTouch["events" + privateListener].includes(eventType)) {
+      this._doNotTouch["eventFunctions" + privateListener].push({
         dimensions: { ...dimensions },
         func,
         name,
         eventType,
       });
     } else {
-      this.#_doNotTouch["events" + privateListener].push(eventType);
+      this._doNotTouch["events" + privateListener].push(eventType);
 
-      this.#_doNotTouch["eventFunctions" + privateListener].push({
+      this._doNotTouch["eventFunctions" + privateListener].push({
         dimensions: { ...dimensions },
         func,
         name,
         eventType,
       });
 
-      this.canvas.addEventListener(eventType, e => {
-        if (e.offsetX === undefined) {
-          throw new RangeError(`Event type "${e.type}" not supported.`);
+      this.canvas.addEventListener(eventType, event => {
+        if (event.offsetX === undefined) {
+          throw new RangeError(`Event type "${event.type}" not supported.`);
         }
 
-        this.#_doNotTouch["eventFunctions" + privateListener].forEach(object => {
+        this._doNotTouch["eventFunctions" + privateListener].forEach(object => {
           if (object.eventType !== eventType) {
             return;
           }
@@ -126,15 +128,15 @@ export default class EventManager {
           const dimensions = object.dimensions;
 
           if (
-            e.offsetX - this.offsetX > dimensions.x
-            && e.offsetX - this.offsetX <
+            event.offsetX > dimensions.x
+            && event.offsetX <
             dimensions.x + dimensions.width
 
-            && e.offsetY - this.offsetY > dimensions.y
-            && e.offsetY - this.offsetY <
+            && event.offsetY > dimensions.y
+            && event.offsetY <
             dimensions.y + dimensions.height
           ) {
-            object.func(e);
+            object.func(event);
           }
         });
       });
@@ -153,17 +155,17 @@ export default class EventManager {
 
     let removed = false;
 
-    this.#_doNotTouch["eventFunctions" + privateListener].forEach((object, index) =>
+    this._doNotTouch["eventFunctions" + privateListener].forEach((object, index) =>
       object.name === name
       && (removed = true)
-      && this.#_doNotTouch["eventFunctions" + privateListener].splice(index, 1)
+      && this._doNotTouch["eventFunctions" + privateListener].splice(index, 1)
     );
 
     return removed;
   }
 
   isInputActive(inputType) {
-    return Boolean(this.#activeInputs[inputType]);
+    return Boolean(this._doNotTouch.activeInputs[inputType]);
   }
 
 
