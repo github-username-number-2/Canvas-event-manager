@@ -26,6 +26,7 @@ const CEM = new CanvasEventManager(
 ## Event manager properties
 
 **canvas**
+
 DOM element
 ```js
 CEM.canvas
@@ -35,6 +36,7 @@ The attached canvas element
 ---
 
 **canvasElements**
+
 array
 ```js
 CEM.canvasElements
@@ -44,6 +46,7 @@ All current elements linked to the canvas
 ---
 
 **contextMenuDisabled**
+
 boolean
 ```js
 CEM.contextMenuDisabled
@@ -53,6 +56,7 @@ Set to true to enable the context menu. Set to false by default.
 ---
 
 **mousePositionX**/**mousePositionY**
+
 null or integer
 ```js
 CEM.mousePositionX
