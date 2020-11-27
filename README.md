@@ -105,3 +105,37 @@ CEM.removeDirectListener(
 Removes all listeners with the specified name.
 
 Returns true if at least 1 element was removed, false if none were removed.
+
+---
+
+**isInputActive**
+```js
+CEM.isInputActive(
+
+  /*string: keyboard event code, LeftMouse or RightMouse*/
+  "KeyW"
+
+);
+//returns true if the W key is currently being pressed
+
+CEM.isInputActive(
+
+  /*string: input name*/
+  "LeftMouse"
+
+);
+//returns true if the left mouse is currently being pressed
+
+CEM.isInputActive(
+
+  /*string: input name*/
+  "RightMouse"
+
+);
+//returns true if the right mouse is currently being pressed
+```
+Detects if specified input is currently being pressed.
+
+Returns true if input is down, false if input is up.
+
+Keyboard event codes can be found [here](https://keycode.info/).
