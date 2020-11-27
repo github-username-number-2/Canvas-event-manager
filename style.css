@@ -7,4 +7,5 @@ canvas {
   position: absolute;
   width: 1000px;
   height: 600px;
+  outline: none;
 }
