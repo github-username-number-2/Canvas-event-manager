@@ -39,6 +39,8 @@ export default class EventManager {
     elementIDIndex: 0,
 
     activeInputs: {},
+
+    canvasElements: [],
   };
 
   //prevents changing of the attached canvas element
@@ -46,7 +48,10 @@ export default class EventManager {
     return this._doNotTouch.canvas;
   }
 
-  canvasElements = [];
+  //prevents changing of the linked canvas elements
+  get canvasElements() {
+    return [...this._doNotTouch.canvasElements];
+  }
 
   contextMenuDisabled = true;
 
