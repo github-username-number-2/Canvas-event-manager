@@ -1,29 +1,29 @@
 const supportedEvents = ["click", "mousemove"];
 
-const Element = class Element {
-#_doNotTouch = {
-  symbol: Symbol(),
-  listeners: [],
-};
-
-constructor(dimensions) {
-  if (typeof dimensions !== "object") {
-    throw new TypeError("Element dimensions must be an object.");
-  }
-
-  this.dimensions = { ...dimensions };
-}
-
-addEventListener(event) {
-  if (typeof event !== "string") {
-    throw new TypeError("Event type must be a string.");
-  }
-}
-
-remove() {
-  //
-}
+class Element {
+  #_doNotTouch = {
+    symbol: Symbol(),
+    listeners: [],
   };
+
+  constructor(dimensions) {
+    if (typeof dimensions !== "object") {
+      throw new TypeError("Element dimensions must be an object.");
+    }
+
+    this.dimensions = { ...dimensions };
+  }
+
+  addEventListener(event) {
+    if (typeof event !== "string") {
+      throw new TypeError("Event type must be a string.");
+    }
+  }
+
+  remove() {
+    //
+  }
+};
 
 
 export default class EventManager {
@@ -46,13 +46,16 @@ export default class EventManager {
   mousePositionX = null;
   mousePositionY = null;
 
-  constructor(canvas, offsetX, offsetY) {
-    if (typeof offsetX !== "number" || typeof offsetY !== "number") {
-      throw new TypeError("Invalid offsets. Offsets must be numbers.");
-    }
-
-    this.offsetX = offsetX;
-    this.offsetY = offsetY;
+  constructor(canvas) {
+    if (
+      !(typeof HTMLElement === "object"
+        ? canvas instanceof HTMLElement
+        : canvas
+        && typeof canvas === "object"
+        && canvas !== null
+        && canvas.nodeType === 1
+        && typeof canvas.nodeName === "string")
+    ) throw new TypeError("Argument must be a canvas element.");
 
     this.canvas = canvas;
 
@@ -83,7 +86,7 @@ export default class EventManager {
     );
   }
 
-  addDirectListener(eventType, dimensions, func, name) {
+  addDirectListener(eventType, dimensions, func, name = "") {
     if (!["string", "number"].includes(typeof name)) {
       throw new TypeError("Names must be strings or numbers.");
     }
@@ -139,6 +142,10 @@ export default class EventManager {
   }
 
   removeDirectListener(name) {
+    if (!["string", "number"].includes(typeof name)) {
+      throw new TypeError("Names must be strings or numbers.");
+    }
+
     let privateListener = "";
     if (arguments[1]) {
       privateListener = "Private";

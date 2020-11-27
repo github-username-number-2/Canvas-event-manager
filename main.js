@@ -6,7 +6,7 @@ const ctx = canvas.getContext("2d");
 ctx.fillStyle = "#000000";
 
 window.EventManager = EventManager;
-window.CEM = new EventManager(canvas, 0, 0);
+window.CEM = new EventManager(canvas);
 
 ctx.fillRect(0, 0, 200, 200);
 CEM.addDirectListener("click", {
