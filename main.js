@@ -15,7 +15,6 @@ CEM.addDirectListener("click", {
   alert(e);
 }, "listener 1");
 
-
 const dimensions = new CEM.BoxDimensions(100, 300, 200, 200);
 
 ctx.fillRect(100, 300, 200, 200);

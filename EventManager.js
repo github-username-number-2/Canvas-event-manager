@@ -41,6 +41,11 @@ export default class EventManager {
     activeInputs: {},
   };
 
+  //prevents changing of the attached canvas element
+  get canvas() {
+    return this._doNotTouch.canvas;
+  }
+
   canvasElements = [];
 
   contextMenuDisabled = true;
@@ -59,7 +64,7 @@ export default class EventManager {
         && typeof canvas.nodeName === "string")
     ) throw new TypeError("Argument must be a canvas element.");
 
-    this.canvas = canvas;
+    this._doNotTouch.canvas = canvas;
 
     canvas.tabIndex = 0;
 
@@ -86,6 +91,9 @@ export default class EventManager {
     canvas.addEventListener("mouseup", event =>
       this._doNotTouch.activeInputs["LeftMouse"] = this._doNotTouch.activeInputs["RightMouse"] = false
     );
+
+    this.addEventListener = canvas.addEventListener;
+    this.removeEventListener = canvas.removeEventListener;
   }
 
   addDirectListener(eventType, dimensions, func, name = "") {

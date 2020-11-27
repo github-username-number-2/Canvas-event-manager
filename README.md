@@ -81,10 +81,10 @@ CEM.addDirectListener(
 
   /*function: listener function*/
   function(event) {
-    console.log(event.type)
+    console.log(event.type);
   },
 
-  /*optional, string or integer: name*/
+  /*optional, string or integer: name, default value is ""*/
   "listener 1"
 
 );
@@ -107,6 +107,50 @@ CEM.removeDirectListener(
 Removes all listeners with the specified name.
 
 Returns true if at least 1 element was removed, false if none were removed.
+
+---
+
+**addEventListener**
+```js
+CEM.addEventListener(
+  
+  /*string: event name*/ 
+  "click",
+
+  /*function: listener function*/
+  function(event) {
+    console.log(event.type);
+  },
+
+  /*additional optional parameters: options, and useCapture*/
+  /*additional information can be found here: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener*/
+
+);
+```
+Adds an event listener to the attached canvas. Same function as CanvasElement.addEventListener().
+
+Returns undefined.
+
+---
+
+**removeEventListener**
+```js
+CEM.addEventListener(
+  
+  /*string: event name*/ 
+  "click",
+
+  /*function: listener function*/
+  listenerFunction,
+
+  /*additional optional parameters: options, and useCapture*/
+  /*additional information can be found here: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener*/
+
+);
+```
+Removes an event listener with the same type and function. Same function as CanvasElement.removeEventListener().
+
+Returns undefined.
 
 ---
 
