@@ -118,20 +118,10 @@ CEM.isInputActive(
 );
 //returns true if the W key is currently being pressed
 
-CEM.isInputActive(
-
-  /*string: input name*/
-  "LeftMouse"
-
-);
+CEM.isInputActive("LeftMouse");
 //returns true if the left mouse is currently being pressed
 
-CEM.isInputActive(
-
-  /*string: input name*/
-  "RightMouse"
-
-);
+CEM.isInputActive("RightMouse");
 //returns true if the right mouse is currently being pressed
 ```
 Detects if specified input is currently being pressed.
