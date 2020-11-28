@@ -16,8 +16,14 @@ class Element {
     this.dimensions = { ...dimensions };
   }
 
-  addEventListener(event) {
-    if (typeof event !== "string") {
+  addEventListener(eventName) {
+    if (typeof eventName !== "string") {
+      throw new TypeError("Event type must be a string.");
+    }
+  }
+
+  removeEventListener(eventName) {
+    if (typeof eventName !== "string") {
       throw new TypeError("Event type must be a string.");
     }
   }
@@ -191,41 +197,19 @@ export default class EventManager {
     }
   }
 
-  ButtonElement = class extends Element {
-    constructor(dimensions = { x: null, y: null, width: null, height: null }) {
+  BoxElement = class extends Element {
+    constructor(dimensions) {
+      if (
+        typeof dimensions !== "object"
+        || typeof dimensions.x !== "number"
+        || typeof dimensions.y !== "number"
+        || typeof dimensions.width !== "number"
+        || typeof dimensions.height !== "number"
+      ) {
+        throw new TypeError("Dimensions argument is not an object or does not contain required proprerties.");
+      }
+
       super(dimensions);
-    }
-  }
-
-  InputElement = class extends Element {
-    constructor(dimensions, functions) {
-      if (typeof dimensions !== "object") {
-        throw new TypeError("Element dimensions must be an object.");
-      }
-    }
-  }
-
-  CheckboxElement = class extends Element {
-    constructor(dimensions, functions) {
-      if (typeof dimensions !== "object") {
-        throw new TypeError("Element dimensions must be an object.");
-      }
-    }
-  }
-
-  FileInputElement = class extends Element {
-    constructor(dimensions, functions) {
-      if (typeof dimensions !== "object") {
-        throw new TypeError("Element dimensions must be an object.");
-      }
-    }
-  }
-
-  NumberInputElement = class extends Element {
-    constructor(dimensions, functions) {
-      if (typeof dimensions !== "object") {
-        throw new TypeError("Element dimensions must be an object.");
-      }
     }
   }
 }

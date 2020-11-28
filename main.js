@@ -24,6 +24,6 @@ CEM.addDirectListener("mousemove", dimensions, function(e) {
 
 CEM.removeDirectListener("listener 2");
 
-window.button = new CEM.ButtonElement(new CEM.BoxDimensions(0, 0, 100, 100));
+window.element = new CEM.BoxElement(new CEM.BoxDimensions(0, 0, 100, 100));
 
 //setInterval(() => console.log(CEM.isInputActive("KeyD"), CEM.isInputActive("LeftMouse"), CEM.isInputActive("RightMouse"), CEM.mousePositionX, CEM.mousePositionY), 1200);
